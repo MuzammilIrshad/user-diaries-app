@@ -1,0 +1,18 @@
+.main_div{
+    margin-top: 2em;
+    width: 80%;
+    margin-inline: auto;
+    border-radius: 20px;
+    background-color: #caaf8c;
+}
+.text{
+    text-decoration: none;
+    font-family: monospace;
+    letter-spacing: 2px;
+    font-size: x-large;
+    color: #fffefd;
+}
+#nav_link{
+   flex: auto;
+   text-align: center;
+}

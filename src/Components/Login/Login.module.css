@@ -1,0 +1,31 @@
+.main_div{
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+    /* border: 1px solid black; */
+    margin-top: 5em;
+    box-shadow: aqua;
+    box-shadow: 1px 5px 15px #aaaaaa;
+}
+h1{
+    font-family: serif;
+    margin-bottom: 2em;
+}
+.fields{
+    width: 300px;
+    /* height: 2px; */
+    /* align-items: center; */
+    margin-bottom: 2em;
+    /* align-content: center; */
+    margin-left: 3em;
+}
+#submitBtn{
+    width: 250px;
+    margin-left: 4em;
+    border-radius: 15px;
+    background-color: rgb(13 110 253 / 49%);
+    color: white;
+}
+#submitBtn:hover{
+    background-color: rgb(13 110 253);   
+}

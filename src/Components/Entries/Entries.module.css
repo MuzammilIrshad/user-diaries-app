@@ -1,0 +1,83 @@
+
+#list>h1{
+    display: flex;
+    justify-content: space-between;
+}
+label{
+    display: block;
+    margin-left: 2em;
+    font-size: larger;
+    font-family: monospace;
+}
+.data{
+    font-family: monospace;
+    
+    width: auto;
+    padding: 1em;
+    box-shadow: 1px 5px 15px #aaaaaa;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+    background-color: rgb(245 247 244 / 86%);
+}
+.date{
+    color: #0000007d;
+    font-size: smaller;
+    margin-top: 1.5em;
+}
+.data h2{
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    font-size: 23px;
+}
+.data h2 i{
+    padding-left: 1em;
+}
+.user {
+    display: flex;
+    justify-content: space-between;
+   
+}
+.user div{
+    margin-top: 0.8em;
+    /* margin-right: 1.5em; */
+    background-color: #41464b;
+    height: 30px;
+    color: aliceblue;
+    width: 100px;
+}
+button{
+    margin: 0 auto; 
+    float: right;
+    /* margin-bottom: 1em; */
+    margin-top: -1.5em;
+    background-color: #41464b;
+    color: aliceblue;
+}
+#diaryName{
+    margin-left: 3em;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    margin-bottom: 2em;
+    width: 350px;
+}
+.diaryType{
+    margin-left: 3em;
+    font-family: -webkit-pictograph;
+    letter-spacing: 3px;
+    margin-bottom: 1em;
+}
+.diaryType label{
+    margin-left: 1em;
+}
+#addDiaryData{
+    float: right;
+    margin-right: 2em;
+    margin-bottom: 1em;
+    background-color: #41464b;
+    border: none;
+    color: aliceblue;
+    font-family: math;
+    padding: 4px;
+}
