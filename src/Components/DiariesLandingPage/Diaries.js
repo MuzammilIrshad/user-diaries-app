@@ -16,51 +16,52 @@ export default function DiariesPage() {
   let { path, url } = useRouteMatch();
   const list = useSelector((state)=>state.diaries.data);
   const entryCount = useSelector((state)=>state.diaries.entries);
-  
+  const userId = useSelector((state)=>state.diaries.user);
 console.log(list);
   const [isOpen, setisOpen] = useState(false);
   const [exampleModal, toggleExampleModal] = useModali();
   const [diaryName, setdiaryName] = useState('');
   const [diaryType, setdiaryType] = useState('');
  const dispatch = useDispatch();
- const id = Math.random();
+ //const id = userId
+ console.log(userId);
 const handleDiaryData = (e)=>{
         e.preventDefault();
         const date = moment().format('LLL');
         console.log(diaryName, diaryType, date);
         
-      const diaryData = {diaryName, diaryType, id, date};
+      const diaryData = {diaryName, diaryType, userId, date};
       console.log(diaryData)
         dispatch(addData(diaryData));
 }
-const handleDelete = (id) =>{
-  dispatch(delData(id));
-  console.log(id);
+const handleDelete = (userId) =>{
+  dispatch(delData(userId));
+  console.log(userId);
 }
   return (
     <>
       <Container>
         <Row>
-          <Col sm={12} lg={8}>
+          <Col sm={12} lg={8} xs={12}>
             <div id={Diaries.list}>
               <h1>
                <p style={{paddingTop:'1em'}}> Diaries List</p>
                 <div>
-                 <p style={{display: 'flex',fontSize: '24px', color: 'black',marginTop: '0.5em', fontWeight:'bolder'}}>My Diaries
+                 <p style={{display: 'flex',fontSize: '24px', color: 'azure',marginTop: '0.5em', fontWeight:'bolder'}}>My Diaries
                 <span  style={{marginLeft:'1em', marginTop:'0.3em'}}>
                 <ToggleButton
                   value={isOpen}
                   onToggle={(value) => setisOpen(!value)}
                  
                 /></span></p>
-                <p style={{fontSize:'24px', color:'black', cursor:'pointer',fontWeight:'bolder'}} onClick={toggleExampleModal}>
+                <p style={{fontSize:'24px', color:'azure', cursor:'pointer',fontWeight:'bolder'}} onClick={toggleExampleModal}>
                   Add Diary
-                  <span style={{paddingLeft:'1.3em',color:'black'}}><MdAddCircle/></span></p>
+                  <span style={{paddingLeft:'1.3em',color:'azure'}}><MdAddCircle/></span></p>
                 </div>
               </h1>
-              <Modali.Modal {...exampleModal}>
-                <form onSubmit={handleDiaryData}>
-                  <input type='text' id={Diaries.diaryName} onChange={(e)=>setdiaryName(e.target.value)}/><br/>
+              <Modali.Modal {...exampleModal} style={{background: '#d4bb9e'}} className={Diaries.modali_header}>
+                <form onSubmit={handleDiaryData} style={{background: '#d4bb9e'}}>
+                  <input type='text' id={Diaries.diaryName} style={{background: 'none'}} onChange={(e)=>setdiaryName(e.target.value)}/><br/>
                  <div className={Diaries.diaryType}>
                   <input type="radio" value="male" id="male"
                    name="gender" onChange={(e)=>setdiaryType(e.target.value)} />
@@ -76,11 +77,11 @@ const handleDelete = (id) =>{
               </Modali.Modal>
               <hr />
               {list && list.map((diary)=>{
-                const id = diary.id;
+                const id = diary.userId;
                  //let count = 0;
-               let entriesCount = entryCount.filter((entries)=>Number(entries.id) === Number(id));
+               let entriesCount = entryCount.filter((entries)=>Number(entries.id) === id);
                 
-                console.log(typeof id)
+                console.log(typeof userId)
                 console.log(entriesCount.length);
              return(
              <div className={Diaries.data} key={diary.id}>
@@ -91,12 +92,12 @@ const handleDelete = (id) =>{
                       <BsLockFill />
                     </i>
                     <i>
-                    <Link to={`/diaries/diary/${id}`}>
+                    <Link to={`/diaries/diary/${userId}`}>
                     <MdEdit/>
                     </Link>
                     </i>
                     <i>
-                      <MdDelete onClick={()=>dispatch(delData(id))}/>
+                      <MdDelete onClick={()=>dispatch(delData(userId))}/>
                     </i>
                   </div>
                 </h2>
@@ -109,7 +110,7 @@ const handleDelete = (id) =>{
                   </p>
                   <div>{entriesCount.length} saved {entriesCount.length < 2 ? 'Entry':'Entries'}</div>
                 </div>
-                <Link to={"/diary/"+id+"/entries"} className={Diaries.link}>
+                <Link to={"/diary/"+userId+"/entries"} className={Diaries.link}>
                   Visit Entries <MdPlayArrow />
                 </Link>
               </div>

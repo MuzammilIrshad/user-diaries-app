@@ -1,38 +1,37 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { auth } from '../../firebase';
 
 
-const user = ''
+//const user = ''
 
 const counterSlice = createSlice({
   name: 'counter',
     initialState:{
-          user,
+          user:'',
           data:[],
           entries:[]
     },
   reducers: {
-    addUser: (state, action) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.user = action.payload.email;
+    addUser:(state, action)=>{
+            state.user = action.payload.id;
+            console.log(state.user,"......",action.payload.id);        
     },
+   
     addData: (state, action) => {
       console.log(state.data);
       const value = state.data.unshift(action.payload);
       
     },
     delData:(state, action)=>{
-     const data = state.data.filter((value)=>value.id !== action.payload);
+     const data = state.data.filter((value)=>value.userId !== action.payload);
        console.log(action.payload)
        state.data = data;
     }, 
     updatedDiary:(state, action)=>{
-      console.log(state.data);
+      console.log(state.data, action.payload);
         const diariesUpdatedList = state.data.map((diary)=>{
           console.log(diary)
-          if(diary.id === Number(action.payload.id)){
+          if(diary.userId == action.payload.id){
             return {...diary, diaryName:action.payload.diaryName, diaryType:action.payload.diaryType}
             
           }

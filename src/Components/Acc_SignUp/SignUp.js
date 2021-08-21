@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as signUp from "./Signup.module.css";
 import Form from "react-bootstrap/Form";
 //import FormControl from 'react-bootstrap/FormControl'
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
 //import Login from "./Login";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+//import { addUser } from "../store/Slice";
+import { auth } from "../../firebase";
+import { Alert } from "react-bootstrap";
 
 export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [name, setname] = useState("");
-  const [isSignUp, setisSignUp] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
+  const history = useHistory();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password, name);
+    
+      setError('');
+      setLoading(true);
+      auth.createUserWithEmailAndPassword(email,password).then((res)=>{
+       return history.push("/");
+      }).catch((err)=>{
+          setError(err.message);
+          console.log(err)
+      });
+    
+    setLoading(false);
   };
+  useEffect(()=>{
+       
+    const unsubscribe = auth.onAuthStateChanged((user)=>{
+            setCurrentUser(user);
+            console.log(user)
+    })
+    console.log(currentUser)
+      return unsubscribe;
+  },[])
   return (
     <div className={signUp.main_div}>
-      <h1>SignUp for Account</h1>
+      <h1 style={{color: '#eff7f7',textAlign: 'center'}}>SignUp for Account</h1>
+      {error && <Alert variant="danger" style={{textAlign:"center"}}>{error}</Alert>}
       <Form onSubmit={handleSubmit}>
         <FloatingLabel
           controlId="floatingInput"
@@ -57,10 +85,10 @@ export default function CreateAccount() {
             value={name}
           />
         </FloatingLabel>
-        <Form.Control type="submit" value="Submit" id={signUp.submitBtn} />
+        <Form.Control type="submit" value="Submit" id={signUp.submitBtn} disabled={loading}/>
       </Form>
-      <p>
-        Already have an account?<Link to="/">Signin</Link>
+      <p style={{color: 'azure',textAlign: 'center',marginTop: '8px'}}>
+        Already have an account?<Link to="/" style={{color: '#0a58ca',fontWeight: '600'}}>Signin</Link>
       </p>
     </div>
   );

@@ -18,13 +18,11 @@ export default function EntriesList() {
   const [entryTitle, setEntryTitle] = useState("");
   const dispatch = useDispatch();
   const entriesList = useSelector((state) =>
-    state.diaries.entries.filter((entry) => Number(entry.id) === Number(id))
+    state.diaries.entries.filter((entry) => entry.id === id)
   );
   //const [entries, setEntries] = useState();
   console.log(entriesList);
-  const diaryEntries = entriesList.filter(
-    (entry) => Number(entry.id) === Number(id)
-  );
+  const diaryEntries = entriesList.filter((entry) => entry.id === id);
   //diaryEntries.map((diary)=>console.log(diary.diaryName));
   console.log(diaryEntries);
   const handleDiaryData = (e) => {

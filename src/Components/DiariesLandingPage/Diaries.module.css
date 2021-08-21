@@ -4,6 +4,9 @@
     justify-content: space-between;
     color: beige;
 }
+.modali_header{
+    background: #d4bb9e;
+}
 .data{
     width: 80%;
     padding: 1em;
@@ -78,4 +81,11 @@
     color: aliceblue;
     font-family: math;
     padding: 4px;
+}
+.editName{
+    font-family: monospace;
+    margin-top: 1em;
+    height: 40px;
+    background: none;
+    font-size: 25px;
 }
