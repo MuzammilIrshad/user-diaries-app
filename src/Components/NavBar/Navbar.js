@@ -2,11 +2,11 @@ import React from "react";
 import * as nav from "./Navbar.module.css";
 import Navbar from "react-bootstrap/Navbar";
 import { Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
-  const user = useSelector((state) => state.diaries.user);
+  //const user = useSelector((state) => state.diaries.user);
 
   return (
     <div>

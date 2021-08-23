@@ -19,6 +19,14 @@ h1{
     /* align-content: center; */
     margin-left: 3em;
 }
+.fields1{
+    width: 300px;
+    /* height: 2px; */
+    /* align-items: center; */
+    margin-bottom: 2em;
+    /* align-content: center; */
+    margin-left: 3em;
+}
 #submitBtn{
     width: 250px;
     margin-left: 4em;

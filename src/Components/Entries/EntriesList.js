@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as Entries from "./Entries.module.css";
-import { BsLockFill } from "react-icons/bs";
-import { MdEdit, MdDelete, MdPlayArrow, MdAddCircle } from "react-icons/md";
+//import { BsLockFill } from "react-icons/bs";
+import { MdDelete, MdAddCircle } from "react-icons/md";
 import Modali, { useModali } from "modali";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addEntry, delEntry } from "../store/Slice";
 import { Row, Container, Col } from "react-bootstrap";

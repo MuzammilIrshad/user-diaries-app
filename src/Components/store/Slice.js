@@ -1,5 +1,5 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
-import { auth } from '../../firebase';
+import { createSlice } from '@reduxjs/toolkit'
+//import { auth } from '../../firebase';
 
 
 //const user = ''
@@ -19,7 +19,7 @@ const counterSlice = createSlice({
    
     addData: (state, action) => {
       console.log(state.data);
-      const value = state.data.unshift(action.payload);
+      //const value = state.data.unshift(action.payload);
       
     },
     delData:(state, action)=>{
@@ -31,7 +31,7 @@ const counterSlice = createSlice({
       console.log(state.data, action.payload);
         const diariesUpdatedList = state.data.map((diary)=>{
           console.log(diary)
-          if(diary.diaryId == action.payload.id){
+          if(diary.diaryId === action.payload.id){
             return {...diary, diaryName:action.payload.diaryName, diaryType:action.payload.diaryType}
             
           }

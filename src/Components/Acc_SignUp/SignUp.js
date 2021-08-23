@@ -6,7 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
 //import Login from "./Login";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 //import { addUser } from "../store/Slice";
 import { auth } from "../../firebase";
 import { Alert } from "react-bootstrap";
@@ -42,7 +42,7 @@ export default function CreateAccount() {
     })
     console.log(currentUser)
       return unsubscribe;
-  },[])
+  })
   return (
     <div className={signUp.main_div}>
       <h1 style={{color: '#eff7f7',textAlign: 'center'}}>SignUp for Account</h1>
@@ -51,8 +51,8 @@ export default function CreateAccount() {
         <FloatingLabel
           controlId="floatingInput"
           label="Email address"
-          className="mb-3"
-          className={signUp.fields}
+          className={`mb-3 ${signUp.fields}`} 
+          
         >
           <Form.Control
             type="email"

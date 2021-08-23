@@ -41,8 +41,8 @@ export default function Login() {
           <FloatingLabel
             controlId="floatingInput"
             label="Email address"
-            className="mb-3"
-            className={login.fields}
+            className={`mb-3 ${login.fields1}`}
+            
           >
             <Form.Control
               type="email"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as Diaries from "./Diaries.module.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link, Redirect, useHistory } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import {updatedDiary} from '../store/Slice';
 import Swal from 'sweetalert2';
 

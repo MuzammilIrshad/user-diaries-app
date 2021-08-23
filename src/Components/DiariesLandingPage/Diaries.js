@@ -7,13 +7,13 @@ import ToggleButton from "react-toggle-button";
 import Modali, { useModali } from 'modali';
 import { addData, delData } from '../store/Slice';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link, useRouteMatch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 
 
 export default function DiariesPage() {
-  let { path, url } = useRouteMatch();
+  //let { path, url } = useRouteMatch();
   const list = useSelector((state)=>state.diaries.data);
   const entryCount = useSelector((state)=>state.diaries.entries);
   const userId = useSelector((state)=>state.diaries.user);
@@ -34,11 +34,7 @@ const handleDiaryData = (e)=>{
       console.log(diaryData)
         dispatch(addData(diaryData));
 }
-const handleDelete = (diaryId) =>{
-  dispatch(delData(diaryId));
-  //console.log(userId);
-}
-  return (
+return (
     <>
       <Container>
         <Row>
