@@ -23,20 +23,20 @@ console.log(list);
   const [diaryName, setdiaryName] = useState('');
   const [diaryType, setdiaryType] = useState('');
  const dispatch = useDispatch();
- //const id = userId
+ const diaryId = String(Math.random());
  console.log(userId);
 const handleDiaryData = (e)=>{
         e.preventDefault();
         const date = moment().format('LLL');
         console.log(diaryName, diaryType, date);
         
-      const diaryData = {diaryName, diaryType, userId, date};
+      const diaryData = {diaryName, diaryType, userId, date, diaryId};
       console.log(diaryData)
         dispatch(addData(diaryData));
 }
-const handleDelete = (userId) =>{
-  dispatch(delData(userId));
-  console.log(userId);
+const handleDelete = (diaryId) =>{
+  dispatch(delData(diaryId));
+  //console.log(userId);
 }
   return (
     <>
@@ -77,11 +77,11 @@ const handleDelete = (userId) =>{
               </Modali.Modal>
               <hr />
               {list && list.map((diary)=>{
-                const id = diary.userId;
+                const id = diary.diaryId;
                  //let count = 0;
-               let entriesCount = entryCount.filter((entries)=>Number(entries.id) === id);
+               let entriesCount = entryCount.filter((entries)=>entries.id === diary.diaryId);
                 
-                console.log(typeof userId)
+                console.log(id)
                 console.log(entriesCount.length);
              return(
              <div className={Diaries.data} key={diary.id}>
@@ -92,12 +92,12 @@ const handleDelete = (userId) =>{
                       <BsLockFill />
                     </i>
                     <i>
-                    <Link to={`/diaries/diary/${userId}`}>
+                    <Link to={`/diaries/diary/${diary.diaryId}`}>
                     <MdEdit/>
                     </Link>
                     </i>
                     <i>
-                      <MdDelete onClick={()=>dispatch(delData(userId))}/>
+                      <MdDelete onClick={()=>dispatch(delData(diaryId))}/>
                     </i>
                   </div>
                 </h2>
@@ -110,7 +110,7 @@ const handleDelete = (userId) =>{
                   </p>
                   <div>{entriesCount.length} saved {entriesCount.length < 2 ? 'Entry':'Entries'}</div>
                 </div>
-                <Link to={"/diary/"+userId+"/entries"} className={Diaries.link}>
+                <Link to={"/diary/"+diary.diaryId+"/entries"} className={Diaries.link}>
                   Visit Entries <MdPlayArrow />
                 </Link>
               </div>

@@ -22,9 +22,9 @@ export default function EntriesList() {
   );
   //const [entries, setEntries] = useState();
   console.log(entriesList);
-  const diaryEntries = entriesList.filter((entry) => entry.id === id);
+  //const diaryEntries = entriesList.filter((entry) => entry.id === id);
   //diaryEntries.map((diary)=>console.log(diary.diaryName));
-  console.log(diaryEntries);
+  //console.log(diaryEntries);
   const handleDiaryData = (e) => {
     e.preventDefault();
     const date = moment().format('LLL');

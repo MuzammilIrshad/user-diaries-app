@@ -23,7 +23,7 @@ const counterSlice = createSlice({
       
     },
     delData:(state, action)=>{
-     const data = state.data.filter((value)=>value.userId !== action.payload);
+     const data = state.data.filter((value)=>value.diaryId !== action.payload);
        console.log(action.payload)
        state.data = data;
     }, 
@@ -31,7 +31,7 @@ const counterSlice = createSlice({
       console.log(state.data, action.payload);
         const diariesUpdatedList = state.data.map((diary)=>{
           console.log(diary)
-          if(diary.userId == action.payload.id){
+          if(diary.diaryId == action.payload.id){
             return {...diary, diaryName:action.payload.diaryName, diaryType:action.payload.diaryType}
             
           }

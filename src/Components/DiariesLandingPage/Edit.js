@@ -9,10 +9,10 @@ export default function Edit(props) {
     const {id} = useParams();
 
     const history = useHistory()
-    console.log(typeof id);
+    console.log(id);
    const diaryData = useSelector((state)=>state.diaries.data);
-   const preData = diaryData.filter((diary)=>diary.userId === id);
-   console.log(preData[0].diaryName);
+   const preData = diaryData.filter((diary)=>Number(diary.diaryId) === Number(id));
+   console.log(diaryData);
     const [diaryName, setDiaryName] = useState(preData[0].diaryName);
     const [diaryType, setdiaryType] = useState(preData[0].diaryType);
    console.log(diaryName, diaryType);
