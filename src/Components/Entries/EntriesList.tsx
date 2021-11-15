@@ -5,30 +5,31 @@ import { MdDelete, MdAddCircle } from "react-icons/md";
 import Modali, { useModali } from "modali";
 import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addEntry, delEntry } from "../store/Slice";
+import { addEntry, delEntry, entries } from "../store/Slice";
 import { Row, Container, Col } from "react-bootstrap";
 import moment from 'moment';
+import { AppDispatch, RootState } from "../store/Store";
 
 
 export default function EntriesList() {
-  const { id } = useParams();
+  const { id }:{id:string} = useParams();
   console.log(id);
   const [exampleModal, toggleExampleModal] = useModali();
-  const [entryName, setEntryName] = useState("");
-  const [entryTitle, setEntryTitle] = useState("");
-  const dispatch = useDispatch();
-  const entriesList = useSelector((state) =>
-    state.diaries.entries.filter((entry) => entry.id === id)
+  const [entryName, setEntryName] = useState<string>("");
+  const [entryTitle, setEntryTitle] = useState<string>("");
+  const dispatch: AppDispatch = useDispatch()
+  const entriesList = useSelector((state:RootState) =>
+    state.diaries.entries.filter((entry) => entry?.id === id)
   );
   //const [entries, setEntries] = useState();
   console.log(entriesList);
   //const diaryEntries = entriesList.filter((entry) => entry.id === id);
   //diaryEntries.map((diary)=>console.log(diary.diaryName));
   //console.log(diaryEntries);
-  const handleDiaryData = (e) => {
+  const handleDiaryData = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    const date = moment().format('LLL');
-    const entryId = new Date().getTime();
+    const date:string = moment().format('LLL');
+    const entryId:number= new Date().getTime();
     const entryData = { id, entryName, entryTitle, entryId, date };
     dispatch(addEntry(entryData));
     console.log(entryId, entryData);
@@ -59,7 +60,7 @@ export default function EntriesList() {
             </h1>
 
             <Modali.Modal {...exampleModal}>
-              <form onSubmit={handleDiaryData}>
+              <form onSubmit={(e)=>handleDiaryData(e)}>
                 <label>Title</label>
                 <input
                   type="text"
@@ -84,18 +85,18 @@ export default function EntriesList() {
             </Modali.Modal>
             <hr />
             {entriesList &&
-              entriesList.map((entry) => {
+              entriesList.map((entry:(entries | null)) => {
                 console.log(entry);
-                const entryId = entry.entryId;
+                const entryId = entry?.entryId;
                 console.log(typeof entryId);
                 const handleDelete = () => {
-                  dispatch(delEntry(entryId));
-                  console.log(entry.id);
+                  dispatch(delEntry(entry?.entryId));
+                  console.log(entry?.id);
                 };
                 return (
-                  <div className={Entries.data} key={entry.entryId}>
+                  <div className={Entries.data} key={entry?.entryId}>
                     <h2>
-                      {entry.entryTitle}
+                      {entry?.entryTitle}
                       <div>
                        
                         <i onClick={handleDelete} style={{cursor:'pointer'}}>
@@ -105,9 +106,9 @@ export default function EntriesList() {
                     </h2>
                     <div className={Entries.user}>
                       <p>
-                        {entry.entryName}
+                        {entry?.entryName}
                         <br />
-                        <span className={Entries.date}>{entry.date}</span>
+                        <span className={Entries.date}>{entry?.date}</span>
                       </p>
                      
                     </div>

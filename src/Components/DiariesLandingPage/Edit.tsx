@@ -4,20 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import {updatedDiary} from '../store/Slice';
 import Swal from 'sweetalert2';
+import { AppDispatch, RootState } from '../store/Store';
 
-export default function Edit(props) {
-    const {id} = useParams();
+export default function Edit() {
+    const {id}:{id:string} = useParams();
 
     const history = useHistory()
     console.log(id);
-   const diaryData = useSelector((state)=>state.diaries.data);
-   const preData = diaryData.filter((diary)=>Number(diary.diaryId) === Number(id));
+   const diaryData = useSelector((state:RootState)=>state.diaries.data);
+   const preData = diaryData.filter((diary)=>Number(diary?.diaryId) === Number(id));
    console.log(diaryData);
-    const [diaryName, setDiaryName] = useState(preData[0].diaryName);
-    const [diaryType, setdiaryType] = useState(preData[0].diaryType);
+    const [diaryName, setDiaryName] = useState<string>(preData[0]?.diaryName);
+    const [diaryType, setdiaryType] = useState<string>(preData[0]?.diaryType);
    console.log(diaryName, diaryType);
-   const dispatch = useDispatch(); 
-   const handleDiaryData = (e)=>{
+   const dispatch: AppDispatch = useDispatch()
+   const handleDiaryData = (e: React.FormEvent<EventTarget>)=>{
              e.preventDefault();
              console.log(diaryName, diaryType, id);
              if(diaryName && diaryType){
@@ -49,7 +50,7 @@ export default function Edit(props) {
         <div>
             
             <div className={Diaries.data} style={{marginTop:'3em', marginInline:'auto'}}>
-                <form onSubmit={handleDiaryData}>
+                <form onSubmit={(e)=>handleDiaryData(e)}>
                   <input type='text' id={Diaries.diaryName}value={diaryName} onChange={(e)=>setDiaryName(e.target.value)}className={Diaries.editName}/><br/>
                  <div className={Diaries.diaryType}>
                   <input type="radio" value="male" id="male"

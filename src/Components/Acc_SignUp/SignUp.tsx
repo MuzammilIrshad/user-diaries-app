@@ -12,14 +12,14 @@ import { auth } from "../../firebase";
 import { Alert } from "react-bootstrap";
 
 export default function CreateAccount() {
-  const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
-  const [name, setname] = useState("");
-  const [currentUser, setCurrentUser] = useState('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setpassword] = useState<string>("");
+  const [name, setname] = useState<string>("");
+  const [currentUser, setCurrentUser] = useState<any>();
   const history = useHistory();
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const handleSubmit = (e) => {
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     console.log(email, password, name);
     
@@ -47,7 +47,7 @@ export default function CreateAccount() {
     <div className={signUp.main_div}>
       <h1 style={{color: '#eff7f7',textAlign: 'center'}}>SignUp for Account</h1>
       {error && <Alert variant="danger" style={{textAlign:"center"}}>{error}</Alert>}
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={(e)=>handleSubmit(e)}>
         <FloatingLabel
           controlId="floatingInput"
           label="Email address"
@@ -88,7 +88,7 @@ export default function CreateAccount() {
         <Form.Control type="submit" value="Submit" id={signUp.submitBtn} disabled={loading}/>
       </Form>
       <p style={{color: 'azure',textAlign: 'center',marginTop: '8px'}}>
-        Already have an account?<Link to="/" style={{color: '#0a58ca',fontWeight: '600'}}>Signin</Link>
+        Already have an account?<Link to="/" style={{color: '#0a58ca'}}>Signin</Link>
       </p>
     </div>
   );
